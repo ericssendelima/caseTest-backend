@@ -66,7 +66,7 @@ app.get("/status", (req, res) => {
   res.send("🚀 Servidor Webhook está rodando!");
 });
 
-app.head("/", (req, res) => {
+app.head("/testeHead", (req, res) => {
   console.log("🔄 Requisição HEAD recebida!");
   // Pode retornar um status 200 OK para confirmar que a requisição HEAD está funcionando
   res.status(200).json({"text": "🔄 Requisição HEAD recebida!"}).end(); // A resposta de HEAD normalmente não tem corpo
