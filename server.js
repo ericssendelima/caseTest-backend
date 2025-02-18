@@ -63,6 +63,12 @@ app.get("/status", (req, res) => {
   res.send("🚀 Servidor Webhook está rodando!");
 });
 
+app.head("/", (req, res) => {
+  console.log("🔄 Requisição HEAD recebida!");
+  // Pode retornar um status 200 OK para confirmar que a requisição HEAD está funcionando
+  res.status(200).end(); // A resposta de HEAD normalmente não tem corpo
+});
+
 // Inicia o servidor na porta correta do Glitch
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
