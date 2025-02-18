@@ -1,5 +1,8 @@
 import 'dotenv/config';
 import express from "express";
+import 'express-async-errors';
+import cors from 'cors';
+
 import { MailtrapClient } from "mailtrap";
 
 const app = express();
@@ -68,6 +71,19 @@ app.head("/", (req, res) => {
   // Pode retornar um status 200 OK para confirmar que a requisição HEAD está funcionando
   res.status(200).json({"text": "🔄 Requisição HEAD recebida!"}).end(); // A resposta de HEAD normalmente não tem corpo
 });
+
+app.use((err, req, res, next) => {
+  if (err instanceof Error) {
+      //Se for uma instância do tipo error 
+      return res.status(400).json({
+          error: err.message
+      })
+  }
+  return res.status(500).json({
+      status: 'error',
+      message: 'Internal server error'
+  })
+})
 
 // Inicia o servidor na porta correta do Glitch
 const PORT = process.env.PORT || 3000;
